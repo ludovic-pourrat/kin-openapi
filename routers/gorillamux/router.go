@@ -118,12 +118,6 @@ func (r *Router) FindRoute(req *http.Request) (*routers.Route, map[string]string
 			route.Operation = route.Spec.Paths[route.Path].GetOperation(route.Method)
 			return &route, vars, nil
 		}
-		switch match.MatchErr {
-		case nil:
-		case mux.ErrMethodMismatch:
-			return nil, nil, routers.ErrMethodNotAllowed
-		default: // What then?
-		}
 	}
 	return nil, nil, routers.ErrPathNotFound
 }
